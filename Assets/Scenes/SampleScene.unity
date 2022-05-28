@@ -152,6 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 329a805d49129024181ee8cdd7786449, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainCamera: {fileID: 519420031}
   pipePrefab: {fileID: 3576244816393674388, guid: 64e536e8bc448c144a5331b2e43e82e9, type: 3}
 --- !u!4 &166595929
 Transform:
@@ -268,7 +269,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &2081757261
 SpriteRenderer:
   m_ObjectHideFlags: 0
