@@ -9,7 +9,7 @@ public class BirdController : MonoBehaviour
 
     bool gameOver = false;
     public bool GameOver { get => gameOver; }
-
+    public float BirdPositionX { get => transform.position.x; }
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();     
@@ -36,7 +36,10 @@ public class BirdController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        gameOver = true;
-        rb.simulated = false;
+        if (collision.gameObject.tag == "Pipe")
+        {
+            gameOver = true;
+            rb.simulated = false;
+        }
     }
 }

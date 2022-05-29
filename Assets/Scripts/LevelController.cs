@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class LevelController : MonoBehaviour
 {
@@ -13,6 +14,9 @@ public class LevelController : MonoBehaviour
     [SerializeField]
     GameObject levelOverText;
 
+    [SerializeField]
+    TMP_Text scoreText;
+
     int nPipes = 7;
     FullPipe[] pipes;
 
@@ -20,6 +24,7 @@ public class LevelController : MonoBehaviour
 
     int firstPipeIndex = 0;
 
+    int score = 0;
     bool gameOver = false;
 
     void Start()
@@ -39,6 +44,15 @@ public class LevelController : MonoBehaviour
             for (int i = 0; i < nPipes; i++)
             {
                 pipes[i].transform.Translate(new Vector3(-3.5f * deltaTime, 0, 0));
+
+                // Check if need to update score
+                if (pipes[i].UpdateScore)
+                {
+                    pipes[i].UpdateScore = false;
+                    score++;
+
+                    scoreText.text = "Score: " + score.ToString();
+                }
             }
 
             // check if first pipe is off screen
