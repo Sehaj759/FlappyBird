@@ -10,6 +10,9 @@ public class LevelController : MonoBehaviour
     [SerializeField]
     BirdController bird;
 
+    [SerializeField]
+    GameObject levelOverText;
+
     int nPipes = 7;
     FullPipe[] pipes;
 
@@ -53,6 +56,10 @@ public class LevelController : MonoBehaviour
         }
 
         gameOver = bird.GameOver;
+        if (gameOver)
+        {
+            levelOverText.SetActive(true);
+        }
     }
 
     void InstantiateFullPipe(Vector3 position, ref FullPipe instantiatedPipe)
