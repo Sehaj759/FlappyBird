@@ -31,7 +31,7 @@ public class BirdController : MonoBehaviour
             if (rb.velocity.y < 0.0f)
             {
                 rb.velocity = Vector2.zero;
-                rb.AddForce(new Vector2(0.0f, 250.0f));
+                rb.AddForce(new Vector2(0.0f, 320.0f));
             }
             jump = false;
         }
