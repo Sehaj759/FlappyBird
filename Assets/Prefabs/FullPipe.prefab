@@ -685,7 +685,7 @@ Transform:
   m_GameObject: {fileID: 6155022370075836415}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children:
   - {fileID: 8033434514917591563}
   - {fileID: 8606837181213305430}
@@ -793,6 +793,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pipePrefab: {fileID: 3576244816393674388, guid: 64e536e8bc448c144a5331b2e43e82e9, type: 3}
+  scoreCollider: {fileID: 6528240664057341491}
 --- !u!1 &6866983259848292353
 GameObject:
   m_ObjectHideFlags: 0

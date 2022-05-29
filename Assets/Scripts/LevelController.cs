@@ -30,10 +30,7 @@ public class LevelController : MonoBehaviour
     void Start()
     {
         pipes = new FullPipe[nPipes];
-        for(int i = 0; i < nPipes; i++)
-        {
-            InstantiateFullPipe(new Vector3(i * pipeDistance, 0, 0), ref pipes[i]);
-        }
+        InitPipes();
     }
 
     void Update()
@@ -59,12 +56,10 @@ public class LevelController : MonoBehaviour
             Vector3 firstPipeScreenPos = Camera.main.WorldToScreenPoint(pipes[firstPipeIndex].transform.position);
             if (firstPipeScreenPos.x < -20.0f)
             {
-                pipes[firstPipeIndex].gameObject.SetActive(false);
-                Destroy(pipes[firstPipeIndex]);
                 int lastPipeIndex = firstPipeIndex - 1;
                 if (lastPipeIndex == -1)
                     lastPipeIndex = nPipes - 1;
-                InstantiateFullPipe(new Vector3(pipes[lastPipeIndex].transform.position.x + pipeDistance, 0, 0), ref pipes[firstPipeIndex]);
+                OffsetFullPipe(new Vector3(pipes[lastPipeIndex].transform.position.x + pipeDistance, 0, 0), ref pipes[firstPipeIndex]);
                 firstPipeIndex = (firstPipeIndex + 1) % nPipes;
             }
         }
@@ -76,9 +71,18 @@ public class LevelController : MonoBehaviour
         }
     }
 
-    void InstantiateFullPipe(Vector3 position, ref FullPipe instantiatedPipe)
+    void InitPipes()
     {
-        instantiatedPipe = Instantiate(pipePrefab, position, Quaternion.identity);
-        instantiatedPipe.CreateFullPipe(position);
+        for (int i = 0; i < nPipes; i++)
+        {
+            pipes[i] = Instantiate(pipePrefab, Vector3.zero, Quaternion.identity);
+            OffsetFullPipe(new Vector3(i * pipeDistance, 0, 0), ref pipes[i]);
+        }
+    }
+
+    void OffsetFullPipe(Vector3 position, ref FullPipe instantiatedPipe)
+    {
+        instantiatedPipe.transform.position = position;
+        instantiatedPipe.OffsetOrDisableFullPipe(0.0f);
     }
 }
