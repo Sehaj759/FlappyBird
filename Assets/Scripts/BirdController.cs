@@ -26,10 +26,13 @@ public class BirdController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (jump && rb.velocity.y < 0.0f)
+        if (jump)
         {
-            rb.velocity = Vector2.zero;
-            rb.AddForce(new Vector2(0.0f, 250.0f));
+            if (rb.velocity.y < 0.0f)
+            {
+                rb.velocity = Vector2.zero;
+                rb.AddForce(new Vector2(0.0f, 250.0f));
+            }
             jump = false;
         }
     }
