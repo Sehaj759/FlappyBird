@@ -83,6 +83,6 @@ public class LevelController : MonoBehaviour
     void OffsetFullPipe(Vector3 position, ref FullPipe instantiatedPipe)
     {
         instantiatedPipe.transform.position = position;
-        instantiatedPipe.OffsetOrDisableFullPipe(0.0f);
+        instantiatedPipe.OffsetOrDisableFullPipe();
     }
 }
