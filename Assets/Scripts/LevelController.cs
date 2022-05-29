@@ -5,13 +5,10 @@ using UnityEngine;
 public class LevelController : MonoBehaviour
 {
     [SerializeField]
-    Camera mainCamera;
-
-    [SerializeField]
-    Pipe pipePrefab;
+    FullPipe pipePrefab;
 
     int nPipes = 7;
-    Pipe[] pipes;
+    FullPipe[] pipes;
 
     float pipeDistance = 5.5f;
 
@@ -19,11 +16,10 @@ public class LevelController : MonoBehaviour
 
     void Start()
     {
-        pipes = new Pipe[nPipes];
+        pipes = new FullPipe[nPipes];
         for(int i = 0; i < nPipes; i++)
         {
-            Pipe pipe = Instantiate(pipePrefab, new Vector3(i * pipeDistance, 0, 0), Quaternion.identity);
-            pipes[i] = pipe;
+            InstantiateFullPipe(new Vector3(i * pipeDistance, 0, 0), ref pipes[i]);
         }
     }
 
@@ -35,8 +31,8 @@ public class LevelController : MonoBehaviour
             pipes[i].transform.Translate(new Vector3(-3.5f * deltaTime, 0, 0));
         }
 
-        // check if first pipe is on screen
-        Vector3 firstPipeScreenPos = mainCamera.WorldToScreenPoint(pipes[firstPipeIndex].transform.position);
+        // check if first pipe is off screen
+        Vector3 firstPipeScreenPos = Camera.main.WorldToScreenPoint(pipes[firstPipeIndex].transform.position);
         if (firstPipeScreenPos.x < -20.0f)
         {
             pipes[firstPipeIndex].gameObject.SetActive(false);
@@ -44,8 +40,14 @@ public class LevelController : MonoBehaviour
             int lastPipeIndex = firstPipeIndex - 1;
             if (lastPipeIndex == -1)
                 lastPipeIndex = nPipes - 1;
-            pipes[firstPipeIndex] = Instantiate(pipePrefab, new Vector3(pipes[lastPipeIndex].transform.position.x + pipeDistance, 0, 0), Quaternion.identity);
+            InstantiateFullPipe(new Vector3(pipes[lastPipeIndex].transform.position.x + pipeDistance, 0, 0), ref pipes[firstPipeIndex]);
             firstPipeIndex = (firstPipeIndex + 1) % nPipes;
         }
+    }
+
+    void InstantiateFullPipe(Vector3 position, ref FullPipe instantiatedPipe)
+    {
+        instantiatedPipe = Instantiate(pipePrefab, position, Quaternion.identity);
+        instantiatedPipe.CreateFullPipe(position);
     }
 }
