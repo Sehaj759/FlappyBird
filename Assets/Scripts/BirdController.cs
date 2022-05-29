@@ -6,6 +6,10 @@ public class BirdController : MonoBehaviour
 {
     Rigidbody2D rb;
     bool jump;
+
+    bool gameOver = false;
+    public bool GameOver { get => gameOver; }
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();     
@@ -14,7 +18,7 @@ public class BirdController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (!gameOver && Input.GetKeyDown(KeyCode.Space))
         {
             jump = true;
         }
@@ -24,8 +28,15 @@ public class BirdController : MonoBehaviour
     {
         if (jump && rb.velocity.y < 0.0f)
         {
-            rb.AddForce(new Vector2(0.0f, 500.0f));
+            rb.velocity = Vector2.zero;
+            rb.AddForce(new Vector2(0.0f, 250.0f));
             jump = false;
         }
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        gameOver = true;
+        rb.simulated = false;
     }
 }

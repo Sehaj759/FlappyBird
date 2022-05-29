@@ -261,6 +261,7 @@ GameObject:
   - component: {fileID: 2081757262}
   - component: {fileID: 2081757261}
   - component: {fileID: 2081757264}
+  - component: {fileID: 2081757265}
   - component: {fileID: 2081757263}
   m_Layer: 0
   m_Name: Bird
@@ -268,7 +269,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!212 &2081757261
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -367,6 +368,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!58 &2081757265
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2081757260}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.009707272}
+  serializedVersion: 2
+  m_Radius: 0.060197085
 --- !u!1 &2135465496
 GameObject:
   m_ObjectHideFlags: 0
@@ -383,7 +400,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!212 &2135465497
 SpriteRenderer:
   m_ObjectHideFlags: 0

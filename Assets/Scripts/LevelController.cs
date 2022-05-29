@@ -7,12 +7,17 @@ public class LevelController : MonoBehaviour
     [SerializeField]
     FullPipe pipePrefab;
 
+    [SerializeField]
+    BirdController bird;
+
     int nPipes = 7;
     FullPipe[] pipes;
 
     float pipeDistance = 5.5f;
 
     int firstPipeIndex = 0;
+
+    bool gameOver = false;
 
     void Start()
     {
@@ -25,24 +30,29 @@ public class LevelController : MonoBehaviour
 
     void Update()
     {
-        float deltaTime = Time.deltaTime;
-        for(int i = 0; i < nPipes; i++)
+        if (!gameOver)
         {
-            pipes[i].transform.Translate(new Vector3(-3.5f * deltaTime, 0, 0));
+            float deltaTime = Time.deltaTime;
+            for (int i = 0; i < nPipes; i++)
+            {
+                pipes[i].transform.Translate(new Vector3(-3.5f * deltaTime, 0, 0));
+            }
+
+            // check if first pipe is off screen
+            Vector3 firstPipeScreenPos = Camera.main.WorldToScreenPoint(pipes[firstPipeIndex].transform.position);
+            if (firstPipeScreenPos.x < -20.0f)
+            {
+                pipes[firstPipeIndex].gameObject.SetActive(false);
+                Destroy(pipes[firstPipeIndex]);
+                int lastPipeIndex = firstPipeIndex - 1;
+                if (lastPipeIndex == -1)
+                    lastPipeIndex = nPipes - 1;
+                InstantiateFullPipe(new Vector3(pipes[lastPipeIndex].transform.position.x + pipeDistance, 0, 0), ref pipes[firstPipeIndex]);
+                firstPipeIndex = (firstPipeIndex + 1) % nPipes;
+            }
         }
 
-        // check if first pipe is off screen
-        Vector3 firstPipeScreenPos = Camera.main.WorldToScreenPoint(pipes[firstPipeIndex].transform.position);
-        if (firstPipeScreenPos.x < -20.0f)
-        {
-            pipes[firstPipeIndex].gameObject.SetActive(false);
-            Destroy(pipes[firstPipeIndex]);
-            int lastPipeIndex = firstPipeIndex - 1;
-            if (lastPipeIndex == -1)
-                lastPipeIndex = nPipes - 1;
-            InstantiateFullPipe(new Vector3(pipes[lastPipeIndex].transform.position.x + pipeDistance, 0, 0), ref pipes[firstPipeIndex]);
-            firstPipeIndex = (firstPipeIndex + 1) % nPipes;
-        }
+        gameOver = bird.GameOver;
     }
 
     void InstantiateFullPipe(Vector3 position, ref FullPipe instantiatedPipe)
