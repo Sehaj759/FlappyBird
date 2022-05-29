@@ -153,6 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pipePrefab: {fileID: 6155022370075836413, guid: bd6080be5030b6c4390260fe56968a34, type: 3}
+  bird: {fileID: 2081757263}
 --- !u!4 &166595929
 Transform:
   m_ObjectHideFlags: 0
