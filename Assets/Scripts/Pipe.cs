@@ -23,10 +23,13 @@ public class Pipe : MonoBehaviour
         boxCollider = GetComponent<BoxCollider2D>();    
     }
 
-    public void Initialize(int nMidPieces, bool isTopHalf)
+    public void Initialize(int nMidPieces, bool isTopHalf, out float height)
     {
         if (nMidPieces == 0)
+        {
+            height = 0;
             return;
+        }
 
         float endPieceWidth; 
         float endPieceHeight;
@@ -80,6 +83,8 @@ public class Pipe : MonoBehaviour
 
         float colliderHeight = endPieceHeight + nMidPieces * midPieceHeight;
         float colliderWidth = endPieceWidth;
+
+        height = scale * colliderHeight;
 
         boxCollider.size = new Vector2(colliderWidth, colliderHeight);
         boxCollider.offset = new Vector2(localTopLeft.x + colliderWidth / 2, localTopLeft .y - colliderHeight / 2);
