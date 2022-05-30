@@ -54,7 +54,7 @@ public class LevelController : MonoBehaviour
 
             // check if first pipe is off screen
             Vector3 firstPipeScreenPos = Camera.main.WorldToScreenPoint(pipes[firstPipeIndex].transform.position);
-            if (firstPipeScreenPos.x < -20.0f)
+            if (firstPipeScreenPos.x < -30.0f)
             {
                 int lastPipeIndex = firstPipeIndex - 1;
                 if (lastPipeIndex == -1)
