@@ -12,7 +12,7 @@ public class LevelController : MonoBehaviour
     BirdController bird;
 
     [SerializeField]
-    GameObject levelOverText;
+    GameObject GameOverUI;
 
     [SerializeField]
     TMP_Text scoreText;
@@ -67,7 +67,7 @@ public class LevelController : MonoBehaviour
         gameOver = bird.GameOver;
         if (gameOver)
         {
-            levelOverText.SetActive(true);
+            GameOverUI.SetActive(true);
         }
     }
 
@@ -84,5 +84,16 @@ public class LevelController : MonoBehaviour
     {
         instantiatedPipe.transform.position = position;
         instantiatedPipe.OffsetOrDisableFullPipe();
+    }
+
+    public void RestartGame()
+    {
+        GameOverUI.SetActive(false);
+        for (int i = 0; i < nPipes; i++)
+        {
+            OffsetFullPipe(new Vector3(i * pipeDistance, 0, 0), ref pipes[i]);
+        }
+        gameOver = false;
+        bird.ResetBird();
     }
 }

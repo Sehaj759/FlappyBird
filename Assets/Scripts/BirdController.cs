@@ -9,7 +9,14 @@ public class BirdController : MonoBehaviour
 
     bool gameOver = false;
     public bool GameOver { get => gameOver; }
-    public float BirdPositionX { get => transform.position.x; }
+
+    float InitPosY;
+
+    void Awake()
+    {
+        InitPosY = transform.position.y;    
+    }
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();     
@@ -44,5 +51,11 @@ public class BirdController : MonoBehaviour
             gameOver = true;
             rb.simulated = false;
         }
+    }
+    public void ResetBird()
+    {
+        transform.position = new Vector3(transform.position.x, InitPosY, transform.position.z);
+        rb.simulated = true;
+        gameOver = false;
     }
 }
