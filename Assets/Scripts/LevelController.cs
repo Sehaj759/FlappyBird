@@ -88,6 +88,8 @@ public class LevelController : MonoBehaviour
 
     public void RestartGame()
     {
+        score = 0;
+        scoreText.text = "Score: 0";
         GameOverUI.SetActive(false);
         for (int i = 0; i < nPipes; i++)
         {

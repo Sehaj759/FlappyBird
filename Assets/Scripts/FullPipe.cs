@@ -38,7 +38,8 @@ public class FullPipe : MonoBehaviour
 
     public void OffsetOrDisableFullPipe()
     {
-        if(Random.Range(0.0f, 1.0f) < noPipeChance)
+        birdCrossed = false;
+        if (Random.Range(0.0f, 1.0f) < noPipeChance)
         {
             sprites.SetActive(false);
             for(int i = 0; i < hitColliders.Length; ++i)
@@ -58,10 +59,10 @@ public class FullPipe : MonoBehaviour
                     hitColliders[i].enabled = true;
                 }
                 scoreCollider.size = scoreColDimens;
-                disabled = true;
+                disabled = false;
             }
             float offset = Random.Range(-offsetRangeAbs, offsetRangeAbs);
-            transform.position = new Vector3(transform.position.x, transform.position.y + offset, transform.position.z);
+            transform.position = new Vector3(transform.position.x, offset, transform.position.z);
         }
     }
 
