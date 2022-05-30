@@ -13,6 +13,7 @@ public class FullPipe : MonoBehaviour
     bool disabled = false;
     Vector2 scoreColDimens;
 
+    float offsetRangeAbs = 3.25f;
     float noPipeChance = 0.25f;
 
     bool birdCrossed = false;
@@ -59,7 +60,7 @@ public class FullPipe : MonoBehaviour
                 scoreCollider.size = scoreColDimens;
                 disabled = true;
             }
-            float offset = Random.Range(-3.0f, 3.0f);
+            float offset = Random.Range(-offsetRangeAbs, offsetRangeAbs);
             transform.position = new Vector3(transform.position.x, transform.position.y + offset, transform.position.z);
         }
     }
