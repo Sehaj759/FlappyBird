@@ -55,6 +55,7 @@ public class BirdController : MonoBehaviour
     public void ResetBird()
     {
         transform.position = new Vector3(transform.position.x, InitPosY, transform.position.z);
+        rb.velocity = Vector2.zero;
         rb.simulated = true;
         gameOver = false;
     }
